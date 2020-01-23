@@ -7,15 +7,15 @@ extraStyleSheets:
   - value-props
 ---
 
-<div style="padding-top: 24px;">
-    <div class="container">
-        <a href="https://register.gotowebinar.com/register/70786962673831938" target="_blank">
-            <img src="/images/lb-comm-meetup-small-banner.jpg" alt="Liquibase Community Meetup Banner" style="width: 100%;">
-        </a>
-        <a href="https://register.gotowebinar.com/register/5354907904678290179" target="_blank">
-            <img src="/images/lb-demo-snall-banner.jpg" alt="Liquibase Demo Banner" style="width: 100%;">
-        </a>
-    </div>
+<div style="padding-top: 24px;">
+    <div class="container" style="width: 100%; display: flex; justify-content: space-between;">
+        <a href="https://register.gotowebinar.com/register/7994594529968763394" target="_blank" style="width: calc(50% - 16px);">
+            <img src="/images/lb-comm-meetup-small-banner.jpg" alt="Liquibase Community Meetup Banner" style="width: 100%">
+        </a>
+        <a href="https://register.gotowebinar.com/register/5354907904678290179" target="_blank" style="width: calc(50% - 16px);">
+            <img src="/images/lb-demo-small-banner.jpg" alt="Liquibase Demo Banner" style="width: 100%">
+        </a>
+    </div>
 </div>
 <p></p>
 <h1 style="display:flex; justify-content:center; text-align:center; font-size: 20px;">Liquibase is the leading open source tool for database schema change management.</h1>
