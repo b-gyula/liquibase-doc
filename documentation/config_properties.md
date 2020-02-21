@@ -32,6 +32,7 @@ the command line value will override the value in the file.
 | referencePassword | The password for your target database. |
 | liquibaseProLicenseKey | Your Liquibase Pro license key (If you have one). |
 | classpath | The path for your database driver |
+| <code>parameter.</code>[parameter name] | Define global [change log parameter](changelog_parameters.html). E.g. parameter.table.name: tableA
 
 Different commands require different parameter information to work. For more information on parameter requirements, search the Liquibase Command topics in the knowledge base.
 
@@ -48,7 +49,14 @@ referencePassword: password
 liquibaseProLicenseKey: aeioufakekey32aeioufakekey785463214
 classpath: ../path/to/file/ojdbc6-11.2.0.3.0.jar
 {% endhighlight %}
+<p></p>
 
+### Advanced configuration options
+
+| Parameter | Definition |
+| --------- | ---------- |
+| includeCatalogInSpecification | <i>boolean</i> Should Liquibase include the catalog name when determining equality? |
+| convertDataTypes | <i>boolean</i> Should Liquibase convert to/from STANDARD data types. Applies to both <code>snapshot</code> and <code>update</code> commands. Default= true|
 
 ### See Also ###
 * [Using a liquibase.properties file in the command  line](command_line.html#using-a-liquibaseproperties-file)

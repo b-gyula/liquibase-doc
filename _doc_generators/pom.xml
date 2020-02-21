@@ -7,7 +7,7 @@
     <artifactId>liquibase-docgenerator</artifactId>
     <name>Liquibase Documentation Generator</name>
     <packaging>jar</packaging>
-    <version>1.0.${revision}</version>
+    <version>1.1.${revision}</version>
 
     <properties>
         <maven.build.timestamp.format>E MMM dd hh:mm:ss zzz yyyy</maven.build.timestamp.format>
@@ -18,7 +18,7 @@
         <java.version>1.8</java.version>
         
         <!-- UPDATE THIS BEFORE RE-GENERATING -->
-        <liquibase.version>3.8.6-local-SNAPSHOT</liquibase.version>
+        <liquibase.version>3.8.7-local-SNAPSHOT</liquibase.version>
         
         <commons.lang3.version>3.3.2</commons.lang3.version>
         <commons.io.version>2.4</commons.io.version>
@@ -65,6 +65,12 @@
             <version>${snakeyaml.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.j2html</groupId>
+            <artifactId>j2html</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -109,6 +115,14 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                 </transformer>
                             </transformers>
+                            <!-- Not including liquibase-core in the jar allows to simply copy a new revision from in
+                            next to the generator jar and use it without the need of rebuilding it each time
+                            <artifactSet>
+                                <excludes>
+                                    <exclude>org.liquibase:liquibase-core</exclude>
+                                </excludes>
+                            </artifactSet>
+                            -->
                         </configuration>
                     </execution>
                 </executions>

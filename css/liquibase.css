@@ -299,7 +299,7 @@ td {
 }
 
 .comparison-table td:nth-of-type(2),
-td:nth-of-type(3) {
+.comparison-table td:nth-of-type(3) {
   font-weight: bold;
 }
 
@@ -387,3 +387,67 @@ a.pagination-item:hover {
   display: table;
   clear: both;
 }
+
+.attribs .name {
+  width: 90px;
+}
+
+.attribs [required]{
+  font-weight: bold;
+  color: #c7254e;
+}
+
+.attribs .type{
+  font-style: italic;
+  margin-right: 12px;
+  color: darkblue;
+}
+
+.attribs .since {
+  color: green;
+}
+
+.attribs .default {
+  color: brown;
+}
+
+.attribs .sample,
+.attribs .default,
+.attribs .since {
+  font-style: italic;
+  margin-left: 12px;
+  vertical-align: bottom;
+}
+
+.attribs .support, .attribs .required {
+  display: block;
+}
+
+.attribs .default .val,
+.attribs .sample .val {
+  font-style: normal;
+}
+
+.right{
+  margin-left: 12px;
+  float: right;
+}
+
+.attribs td.desc > span {
+  margin-top: 4px;
+}
+
+.attribs .header {
+  margin-top: 6px;
+  font-size: large;
+}
+
+.note {
+  margin-top: 5px;
+}
+
+table#nestedAttrs {
+  margin: 0 0 0 0;
+}
+
+#nestedAttrs tbody tr:nth-child(even) td, tbody tr.even td {background: #fff;}

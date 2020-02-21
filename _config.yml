@@ -36,7 +36,7 @@ permalink: /:year/:month/:title.html
 paginate: 10
 paginate_path: "/blog/page_:num/"
 
-gems:
+plugins:
 - jekyll-redirect-from
 - jekyll-paginate
 
@@ -46,7 +46,7 @@ sass:
   # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
-# exclude:
+exclude:
 #   - Gemfile
 #   - Gemfile.lock
 #   - node_modules
@@ -54,3 +54,13 @@ sass:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+  - scripts/
+  - gradle/
+  - gradlew
+  - converters/
+  - '*.sh'
+  - '*.gradle'
+  - '*.groovy'
+  - '*.jar'
+  - '*.log'
+  - Jenkinsfile

@@ -98,6 +98,12 @@ the schema in JSON format, and that JSON snapshot can serve as a comparison data
 <tr><td>tag &lt;tag&gt;</td><td>"Tags" the current database state for future rollback.</td></tr>
 <tr><td>tagExists &lt;tag&gt;</td><td>Checks whether the given tag already exists.</td></tr>
 <tr><td>validate</td><td>Checks the changelog for errors.</td></tr>
+<tr><td>calculateCheckSum</td><td></td></tr>
+<tr><td>executeSql</td><td>Parameters:
+      <table><tr><td>sql</td><td>Sql to execute</td></tr>
+            <tr><td>sqlFile</td><td>Sql file to execute</td></tr>
+            <tr><td>delimiter</td><td></td></tr>
+      </table></td></tr>
 </table>
 
 

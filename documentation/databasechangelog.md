@@ -12,9 +12,14 @@ The root of all Liquibase changes is the databaseChangeLog file.
 <table>
 <tr><th>Attribute</th><th>Description</th></tr>
 <tr><td>logicalFilePath</td><td>Use to override the file name and path when creating the unique identifier of change sets. Required when moving or renaming change logs.</td></tr>
+<tr><td>objectQuotingStrategy</td><td>This controls how object names are quoted in the SQL generated or used in calls to the database. Different databases do different things to
+the names of objects, for example Oracle converts everything to uppercase (unless quoted). There are three possible values. The default value is <code>LEGACY</code>.<br/>
+<code>LEGACY</code> - Same behavior as in Liquibase 2.0<br/>
+<code>QUOTE_ALL_OBJECTS</code> - Every object gets quoted. e.g. person becomes "person".<br/>
+<code>QUOTE_ONLY_RESERVED_WORDS</code> - Quote reserved keywords and invalid column names.</td></tr>
 </table>
 
-## Available Sub-Tags ##
+## Available nested elements ##
 
 <table>
 <tr><th>Tag</th><th>Description</th></tr>

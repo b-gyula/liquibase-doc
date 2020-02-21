@@ -24,6 +24,8 @@ Other refactorings such as "drop table" and "insert data" have no corresponding 
 `splitStatements` set to `true` and `endDelimiter` set to `;`.</td></tr>
 <tr><td>changeSetId</td><td>Id of changeset to rerun in order to rollback this change.  Example: for rolling back a dropTable change, reference the changeSet that created the table.  </td></tr>
 <tr><td>changeSetAuthor</td><td>Author of changeset to rerun in order to rollback this change  </td></tr>
+<tr><td>changeSetPath</td><td>Normalized name of the file containing the changeset to rerun in order to rollback this
+ changeSet. If not defined, the actual file is used.</td></tr>
 </table>
 
 ## Samples ##

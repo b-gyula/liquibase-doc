@@ -63,7 +63,9 @@ The "column" tag is a tag that is re-used throughout the Liquibase XML when colu
     </tr>
     <tr>
       <td>defaultValue</td>
-      <td>Default value for column.</td>
+      <td>Default value for column.
+      <div class='note'><b>Note:</b> If not set the first <code>defaultValueXXX</code> defined is used in the order they
+             appear.</div></td>
     </tr>
     <tr>
       <td>defaultValueNumeric</td>
