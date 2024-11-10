@@ -1,0 +1,4050 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.liquibase.org/xml/ns/dbchangelog"
+            xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+            elementFormDefault="qualified">
+
+    <xsd:complexType name="dropPackage">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drops an existing package
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="packageName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the package to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="packageName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="addUniqueConstraint">
+        <xsd:annotation>
+            <xsd:documentation>
+                Adds a unique constrant to an existing column or set of columns.
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="deferrable" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    True if this constraint is deferrable, False otherwise
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="clustered" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="forIndexName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="constraintName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the unique constraint
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to create the unique constraint on
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="forIndexSchemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tablespace" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    'Tablespace' to create the index in. Corresponds to file group in mssql
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnNames" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column(s) to create the unique constraint on. Comma separated if multiple
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="disabled" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    True if this constraint is disabled, False otherwise
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="forIndexCatalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="initiallyDeferred" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    True if this constraint is initially deferred, False otherwise
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="validate" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    This is true if the unique constraint has 'ENABLE VALIDATE' set, or false if the foreign key has 'ENABLE NOVALIDATE' set.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="deferrable" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="clustered" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="forIndexName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="constraintName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="forIndexSchemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tablespace" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnNames" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="disabled" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="forIndexCatalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="initiallyDeferred" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="validate" type="xsd:boolean" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="alterSequence">
+        <xsd:annotation>
+            <xsd:documentation>
+                Alter properties of an existing sequence
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="ordered" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Does the sequence need to be guaranteed to be genererated inm the order of request?
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="minValue" type="xsd:integer">
+            <xsd:annotation>
+                <xsd:documentation>
+                    New minimum value for the sequence
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="cacheSize" type="xsd:integer">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Change the cache size?
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="maxValue" type="xsd:integer">
+            <xsd:annotation>
+                <xsd:documentation>
+                    New maximum value for the sequence
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="dataType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Data type of the sequence
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="incrementBy" type="xsd:integer">
+            <xsd:annotation>
+                <xsd:documentation>
+                    New amount the sequence should increment by
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="sequenceName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="cycle" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="ordered" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="minValue" type="xsd:integer" maxOccurs="unbounded"/>
+             <xsd:element name="cacheSize" type="xsd:integer" maxOccurs="unbounded"/>
+             <xsd:element name="maxValue" type="xsd:integer" maxOccurs="unbounded"/>
+             <xsd:element name="dataType" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="incrementBy" type="xsd:integer" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="sequenceName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="cycle" type="xsd:boolean" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="disableTrigger">
+        <xsd:annotation>
+            <xsd:documentation>
+                Disable Trigger
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="triggerName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="scope" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="triggerName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="scope" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropNotNullConstraint">
+        <xsd:annotation>
+            <xsd:documentation>
+                Makes a column nullable
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnDataType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Current data type of the column
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table containing that the column to drop the constraint from
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column to drop the constraint from
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnDataType" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="addDefaultValue">
+        <xsd:annotation>
+            <xsd:documentation>
+                Adds a default value to the database definition for the specified column.
+One of defaultValue, defaultValueNumeric, defaultValueBoolean or defaultValueDate must be set
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="defaultValueBoolean" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="defaultValueConstraintName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="defaultValue" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Default value. Either this property or one of the other defaultValue* properties are required.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+         
+        <xsd:attribute name="defaultValueComputed">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="defaultValueDate" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+         
+        <xsd:attribute name="defaultValueSequenceNext">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnDataType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Current data type of the column to add default value to
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column to add a default value to
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="defaultValueNumeric" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to containing the column
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="defaultValueBoolean" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="defaultValueConstraintName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="defaultValue" type="xsd:string" maxOccurs="unbounded"/>
+            <xsd:element name="defaultValueComputed"  maxOccurs="unbounded"/>
+             <xsd:element name="defaultValueDate" type="xsd:string" maxOccurs="unbounded"/>
+            <xsd:element name="defaultValueSequenceNext"  maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnDataType" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="defaultValueNumeric" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="markUnused">
+        <xsd:annotation>
+            <xsd:documentation>
+                Marks Column Unused
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="renameTable">
+        <xsd:annotation>
+            <xsd:documentation>
+                Renames an existing table
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="newTableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    New name for the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="oldTableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to rename
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="newTableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="oldTableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropPackageBody">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drops an existing package body
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="packageBodyName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the package body to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="packageBodyName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropAllForeignKeyConstraints">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drops all foreign key constraints for a table
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="baseTableSchemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="baseTableCatalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table containing columns constrained by foreign keys
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="baseTableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="baseTableSchemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="baseTableCatalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="baseTableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropColumn">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drop existing column(s).
+
+To drop a single column, use the simple form of this element where the tableName and columnName are specified as attributes. To drop several columns, specify the tableName as an attribute, and then specify a set of nested <column> tags. If nested <column> tags are present, the columnName attribute will be ignored.
+            </xsd:documentation>
+        </xsd:annotation>
+        <choice maxOccurs="unbounded">
+            <element name="columns" type="class liquibase.change.ColumnConfig" minOccurs="0" maxOccurs="unbounded"/>
+        </choice>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+         
+        <xsd:attribute name="columns">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Columns to be dropped if dropping multiple columns. If this is populated, the columnName attribute is ignored.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table containing the column to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column to drop, if dropping a single column
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+            <xsd:element name="columns"  maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropTrigger">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drop trigger
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="triggerName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="scope" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="triggerName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="scope" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropUniqueConstraint">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drops an existing unique constraint
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="constraintName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of unique constraint to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="uniqueColumns" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to drop the unique constraint from
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="constraintName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="uniqueColumns" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropView">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drops an existing view
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="viewName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the view to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="viewName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropIndex">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drops an existing index
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="indexName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the index to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name fo the indexed table.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="indexName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="empty">
+        <xsd:annotation>
+            <xsd:documentation>
+                empty
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropDefaultValue">
+        <xsd:annotation>
+            <xsd:documentation>
+                Removes the database default value for a column
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnDataType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of column to drop the default value from
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to containing the column
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnDataType" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="output">
+        <xsd:annotation>
+            <xsd:documentation>
+                Logs a message and continues execution.
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="message" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Message to output
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="target" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Target for message. Possible values: STDOUT, STDERR, FATAL, WARN, INFO, DEBUG. Default value: STDERR
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="message" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="target" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropSynonym">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drops a synonym
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="private" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="synonymCatalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="synonymSchemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="synonymName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="objectType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="private" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="synonymCatalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="synonymSchemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="synonymName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="objectType" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="renameTrigger">
+        <xsd:annotation>
+            <xsd:documentation>
+                Rename Trigger
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="newTriggerName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="oldTriggerName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="newTriggerName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="oldTriggerName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="renameColumn">
+        <xsd:annotation>
+            <xsd:documentation>
+                Renames an existing column
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="newColumnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name to rename the column to
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnDataType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Data type of the column
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="remarks" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Remarks of the column
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="oldColumnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the existing column to rename
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table containing that the column to rename
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="newColumnName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnDataType" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="remarks" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="oldColumnName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropProcedure">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drops an existing procedure
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="procedureName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the stored procedure to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="procedureName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="renameSequence">
+        <xsd:annotation>
+            <xsd:documentation>
+                Renames an existing sequence
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="newSequenceName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    New name for the sequence
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="oldSequenceName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the sequence to rename
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="newSequenceName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="oldSequenceName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="customChange">
+        <xsd:annotation>
+            <xsd:documentation>
+                Although Liquibase tries to provide a wide range of database refactorings, there are times you may want to create your own custom refactoring class.
+
+To create your own custom refactoring, simply create a class that implements the liquibase.change.custom.CustomSqlChange or liquibase.change.custom.CustomTaskChange interface and use the <custom> tag in your change set.
+
+If your change can be rolled back, implement the liquibase.change.custom.CustomSqlRollback interface as well.
+
+For a sample custom change class, see liquibase.change.custom.ExampleCustomSqlChange
+            </xsd:documentation>
+        </xsd:annotation>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropForeignKeyConstraint">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drops an existing foreign key
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="baseTableSchemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="baseTableCatalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="constraintName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the foreign key constraint to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="baseTableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table containing the column constrained by the foreign key
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="baseTableSchemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="baseTableCatalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="constraintName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="baseTableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropSequence">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drop an existing sequence
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="sequenceName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the sequence to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="sequenceName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="addColumn">
+        <xsd:annotation>
+            <xsd:documentation>
+                Adds a new column to an existing table
+            </xsd:documentation>
+        </xsd:annotation>
+        <choice maxOccurs="unbounded">
+            <element name="columns" type="class liquibase.change.AddColumnConfig" minOccurs="1" maxOccurs="unbounded"/>
+        </choice>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+         
+        <xsd:attribute name="columns">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Column constraint and foreign key information. Setting the "defaultValue" attribute will specify a default value for the column. Setting the "value" attribute will set all rows existing to the specified value without modifying the column default.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to add the column to
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+            <xsd:element name="columns"  maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="createTrigger">
+        <xsd:annotation>
+            <xsd:documentation>
+                Creates a database trigger
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="comments" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="triggerName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the trigger to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="replaceIfExists" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="dbms" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="relativeToChangelogFile" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="encoding" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="path" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    File containing the procedure text. Either this attribute or a nested procedure text is required.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="procedureBody" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="scope" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="disabled" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="triggerBody" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="comments" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="triggerName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="replaceIfExists" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="dbms" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="relativeToChangelogFile" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="encoding" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="path" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="procedureBody" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="scope" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="disabled" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="triggerBody" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="createPackageBody">
+        <xsd:annotation>
+            <xsd:documentation>
+                Creates a stored package body
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="path" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    File containing the procedure text. Either this attribute or a nested procedure text is required.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="procedureBody" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="comments" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="packageBodyName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the package body to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="replaceIfExists" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="dbms" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="relativeToChangelogFile" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="packageBodyText" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="encoding" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="path" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="procedureBody" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="comments" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="packageBodyName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="replaceIfExists" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="dbms" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="relativeToChangelogFile" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="packageBodyText" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="encoding" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropPrimaryKey">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drops an existing primary key
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="constraintName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the primary key
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="dropIndex" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to drop the primary key of
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="constraintName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="dropIndex" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="executeCommand">
+        <xsd:annotation>
+            <xsd:documentation>
+                Executes a system command. Because this refactoring doesn't generate SQL like most, using Liquibase commands such as migrateSQL may not work as expected. Therefore, if at all possible use refactorings that generate SQL.
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="timeout" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Timeout value for executable to run
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="executable" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the executable to run
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="timeout" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="executable" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="createSequence">
+        <xsd:annotation>
+            <xsd:documentation>
+                Creates a new database sequence
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="ordered" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Does the sequence need to be guaranteed to be genererated inm the order of request?
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="minValue" type="xsd:integer">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The minimum value of the sequence
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="cacheSize" type="xsd:integer">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Number of values to fetch per query
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="maxValue" type="xsd:integer">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The maximum value of the sequence
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="incrementBy" type="xsd:integer">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Interval between sequence numbers
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="dataType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Data type of the sequence
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="startValue" type="xsd:integer">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The first sequence number to be generated.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="sequenceName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the sequence to create
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="cycle" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Can the sequence cycle when it hits the max value?
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="ordered" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="minValue" type="xsd:integer" maxOccurs="unbounded"/>
+             <xsd:element name="cacheSize" type="xsd:integer" maxOccurs="unbounded"/>
+             <xsd:element name="maxValue" type="xsd:integer" maxOccurs="unbounded"/>
+             <xsd:element name="incrementBy" type="xsd:integer" maxOccurs="unbounded"/>
+             <xsd:element name="dataType" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="startValue" type="xsd:integer" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="sequenceName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="cycle" type="xsd:boolean" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="addCheckConstraint">
+        <xsd:annotation>
+            <xsd:documentation>
+                Adds a check constrant to an existing column or set of columns.
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="constraintBody" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="disabled" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="constraintName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the check constraint
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to create the check constraint on
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="validate" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    This is true if the check constraint has 'ENABLE VALIDATE' set, or false if the check constraint has 'ENABLE NOVALIDATE' set.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="constraintBody" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="disabled" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="constraintName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="validate" type="xsd:boolean" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="loadUpdateData">
+        <xsd:annotation>
+            <xsd:documentation>
+                Loads or updates data from a CSV file into an existing table. Differs from loadData by issuing a SQL batch that checks for the existence of a record. If found, the record is UPDATEd, else the record is INSERTed. Also, generates DELETE statements for a rollback.
+
+A value of NULL in a cell will be converted to a database NULL rather than the string 'NULL'
+            </xsd:documentation>
+        </xsd:annotation>
+        <choice maxOccurs="unbounded">
+            <element name="columns" type="class liquibase.change.core.LoadDataColumnConfig" minOccurs="1" maxOccurs="unbounded"/>
+        </choice>
+                <xsd:attribute name="usePreparedStatements" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="onlyUpdate" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    If true, records with no matching database record should be ignored
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+         
+        <xsd:attribute name="columns">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Defines how the data should be loaded.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="quotchar" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="relativeToChangelogFile" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="encoding" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Encoding of the CSV file (defaults to UTF-8)
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="separator" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to insert or update data in
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="commentLineStartsWith" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="file" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    CSV file to load
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="primaryKey" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Comma delimited list of the columns for the primary key
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="usePreparedStatements" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="onlyUpdate" type="xsd:boolean" maxOccurs="unbounded"/>
+            <xsd:element name="columns"  maxOccurs="unbounded"/>
+             <xsd:element name="quotchar" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="relativeToChangelogFile" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="encoding" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="separator" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="commentLineStartsWith" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="file" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="primaryKey" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="stop">
+        <xsd:annotation>
+            <xsd:documentation>
+                Stops Liquibase execution with a message. Mainly useful for debugging and stepping through a changelog
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="message" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Message to output when execution stops
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="message" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="tagDatabase">
+        <xsd:annotation>
+            <xsd:documentation>
+                Applies a tag to the database for future rollback
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="tag" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Tag to apply
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="tag" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="createFunction">
+        <xsd:annotation>
+            <xsd:documentation>
+                Creates a stored function
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="procedureBody" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="path" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    File containing the procedure text. Either this attribute or a nested procedure text is required.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="comments" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="functionName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the function to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="replaceIfExists" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="dbms" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="relativeToChangelogFile" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="functionBody" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="encoding" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="procedureBody" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="path" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="comments" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="functionName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="replaceIfExists" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="dbms" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="relativeToChangelogFile" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="functionBody" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="encoding" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="disableCheckConstraint">
+        <xsd:annotation>
+            <xsd:documentation>
+                Disable Check Constraint
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="constraintName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="constraintName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="enableTrigger">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enable Trigger
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="triggerName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="scope" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="triggerName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="scope" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="sqlFile">
+        <xsd:annotation>
+            <xsd:documentation>
+                The 'sqlFile' tag allows you to specify any sql statements and have it stored external in a file. It is useful for complex changes that are not supported through Liquibase's automated refactoring tags such as stored procedures.
+
+The sqlFile refactoring finds the file by searching in the following order:
+
+The file is searched for in the classpath. This can be manually set and by default the Liquibase startup script adds the current directory when run.
+The file is searched for using the file attribute as a file name. This allows absolute paths to be used or relative paths to the working directory to be used.
+The 'sqlFile' tag can also support multiline statements in the same file. Statements can either be split using a ; at the end of the last line of the SQL or a go on its own on the line between the statements can be used.Multiline SQL statements are also supported and only a ; or go statement will finish a statement, a new line is not enough. Files containing a single statement do not need to use a ; or go.
+
+The sql file can also contain comments of either of the following formats:
+
+A multiline comment that starts with /* and ends with */.
+A single line comment starting with <space>--<space> and finishing at the end of the line
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="path" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The file path of the SQL file to load
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="endDelimiter" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Delimiter to apply to the end of the statement. Defaults to ';', may be set to ''.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="splitStatements" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Set to false to not have liquibase split statements on ;'s and GO's. Defaults to true if not set
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="stripComments" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Set to true to remove any comments in the SQL before executing, otherwise false. Defaults to false if not set
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="dbms" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="relativeToChangelogFile" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="encoding" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="path" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="endDelimiter" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="splitStatements" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="stripComments" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="dbms" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="relativeToChangelogFile" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="encoding" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="setTableRemarks">
+        <xsd:annotation>
+            <xsd:documentation>
+                Set remarks on a table
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="remarks" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="remarks" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="addForeignKeyConstraint">
+        <xsd:annotation>
+            <xsd:documentation>
+                Adds a foreign key constraint to an existing column
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="baseTableSchemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="deferrable" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Is the foreign key deferrable
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="referencedTableCatalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="referencedTableSchemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="constraintName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the new foreign key constraint
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="baseColumnNames" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of column(s) to place the foreign key constraint on. Comma-separate if multiple
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="referencedTableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table the foreign key points to
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="onDelete" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    ON DELETE functionality. Possible values: 'CASCADE', 'SET NULL', 'SET DEFAULT', 'RESTRICT', 'NO ACTION'
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="referencedColumnNames" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Column(s) the foreign key points to. Comma-separate if multiple
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="baseTableCatalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="initiallyDeferred" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Is the foreign key initially deferred
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="onUpdate" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    ON UPDATE functionality. Possible values: 'CASCADE', 'SET NULL', 'SET DEFAULT', 'RESTRICT', 'NO ACTION'
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="baseTableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table containing the column to constrain
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="validate" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    This is true if the foreign key has 'ENABLE VALIDATE' set, or false if the foreign key has 'ENABLE NOVALIDATE' set.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="referencesUniqueColumn" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="baseTableSchemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="deferrable" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="referencedTableCatalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="referencedTableSchemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="constraintName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="baseColumnNames" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="referencedTableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="onDelete" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="referencedColumnNames" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="baseTableCatalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="initiallyDeferred" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="onUpdate" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="baseTableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="validate" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="referencesUniqueColumn" type="xsd:boolean" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="mergeColumns">
+        <xsd:annotation>
+            <xsd:documentation>
+                Concatenates the values in two columns, joins them by with string, and stores the resulting value in a new column.
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="column1Name" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column containing the first half of the data
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="joinString" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    String to place include between the values from column1 and column2 (may be empty)
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="column2Name" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column containing the second half of the data
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="finalColumnType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Data type of the column to create
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="finalColumnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column to create
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table containing the columns to join
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="column1Name" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="joinString" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="column2Name" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="finalColumnType" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="finalColumnName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="createTable">
+        <xsd:annotation>
+            <xsd:documentation>
+                Create Table
+            </xsd:documentation>
+        </xsd:annotation>
+        <choice maxOccurs="unbounded">
+            <element name="columns" type="class liquibase.change.ColumnConfig" minOccurs="1" maxOccurs="unbounded"/>
+        </choice>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tablespace" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+         
+        <xsd:attribute name="columns">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="remarks" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tablespace" type="xsd:string" maxOccurs="unbounded"/>
+            <xsd:element name="columns"  maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="remarks" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropFunction">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drops an existing function
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="functionName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the function to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="functionName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="insert">
+        <xsd:annotation>
+            <xsd:documentation>
+                Inserts data into an existing table
+            </xsd:documentation>
+        </xsd:annotation>
+        <choice maxOccurs="unbounded">
+            <element name="columns" type="class liquibase.change.ColumnConfig" minOccurs="1" maxOccurs="unbounded"/>
+        </choice>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+         
+        <xsd:attribute name="columns">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Data to insert into columns
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="dbms" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to insert data into
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+            <xsd:element name="columns"  maxOccurs="unbounded"/>
+             <xsd:element name="dbms" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="update">
+        <xsd:annotation>
+            <xsd:documentation>
+                Updates data in an existing table
+            </xsd:documentation>
+        </xsd:annotation>
+        <choice maxOccurs="unbounded">
+            <element name="columns" type="class liquibase.change.ColumnConfig" minOccurs="1" maxOccurs="unbounded"/>
+        </choice>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+         
+        <xsd:attribute name="columns">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Data to update
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="where" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+            <xsd:element name="columns"  maxOccurs="unbounded"/>
+             <xsd:element name="where" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="addPrimaryKey">
+        <xsd:annotation>
+            <xsd:documentation>
+                Adds a primary key out of an existing column or set of columns.
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="forIndexSchemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tablespace" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnNames" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column(s) to create the primary key on. Comma separated if multiple
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="clustered" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="forIndexName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="constraintName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of primary key constraint
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="forIndexCatalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to create the primary key on
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="validate" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    This is true if the primary key has 'ENABLE VALIDATE' set, or false if the primary key has 'ENABLE NOVALIDATE' set.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="forIndexSchemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tablespace" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnNames" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="clustered" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="forIndexName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="constraintName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="forIndexCatalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="validate" type="xsd:boolean" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="loadData">
+        <xsd:annotation>
+            <xsd:documentation>
+                Loads data from a CSV file into an existing table. A value of NULL in a cell will be converted to a database NULL rather than the string 'NULL'.
+Lines starting with # (hash) sign are treated as comments. You can change comment pattern by specifying 'commentLineStartsWith' property in loadData tag.To disable comments set 'commentLineStartsWith' to empty value'
+
+If the data type for a load column is set to NUMERIC, numbers are parsed in US locale (e.g. 123.45).
+Date/Time values included in the CSV file should be in ISO format http://en.wikipedia.org/wiki/ISO_8601 in order to be parsed correctly by Liquibase. Liquibase will initially set the date format to be 'yyyy-MM-dd'T'HH:mm:ss' and then it checks for two special cases which will override the data format string.
+
+If the string representing the date/time includes a '.', then the date format is changed to 'yyyy-MM-dd'T'HH:mm:ss.SSS'
+If the string representing the date/time includes a space, then the date format is changed to 'yyyy-MM-dd HH:mm:ss'
+Once the date format string is set, Liquibase will then call the SimpleDateFormat.parse() method attempting to parse the input string so that it can return a Date/Time. If problems occur, then a ParseException is thrown and the input string is treated as a String for the INSERT command to be generated.
+If UUID type is used UUID value is stored as string and NULL in cell is supported. Column config should be used in xml.
+            </xsd:documentation>
+        </xsd:annotation>
+        <choice maxOccurs="unbounded">
+            <element name="columns" type="class liquibase.change.core.LoadDataColumnConfig" minOccurs="1" maxOccurs="unbounded"/>
+        </choice>
+                <xsd:attribute name="usePreparedStatements" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="commentLineStartsWith" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="file" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    CSV file to load
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="quotchar" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+         
+        <xsd:attribute name="columns">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Defines how the data should be loaded.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="relativeToChangelogFile" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="encoding" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Encoding of the CSV file (defaults to UTF-8)
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="separator" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to insert data into
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="usePreparedStatements" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="commentLineStartsWith" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="file" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="quotchar" type="xsd:string" maxOccurs="unbounded"/>
+            <xsd:element name="columns"  maxOccurs="unbounded"/>
+             <xsd:element name="relativeToChangelogFile" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="encoding" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="separator" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="delete">
+        <xsd:annotation>
+            <xsd:documentation>
+                Deletes data from an existing table
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="where" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="where" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="createSynonym">
+        <xsd:annotation>
+            <xsd:documentation>
+                Creates a synonym
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="objectSchemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="private" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="objectCatalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="synonymCatalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="replaceIfExists" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="objectName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="synonymSchemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="objectType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="synonymName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="objectSchemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="private" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="objectCatalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="synonymCatalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="replaceIfExists" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="objectName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="synonymSchemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="objectType" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="synonymName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="sql">
+        <xsd:annotation>
+            <xsd:documentation>
+                The 'sql' tag allows you to specify whatever sql you want. It is useful for complex changes that aren't supported through Liquibase's automated refactoring tags and to work around bugs and limitations of Liquibase. The SQL contained in the sql tag can be multi-line.
+
+The createProcedure refactoring is the best way to create stored procedures.
+
+The 'sql' tag can also support multiline statements in the same file. Statements can either be split using a ; at the end of the last line of the SQL or a 'GO' on its own on the line between the statements can be used. Multiline SQL statements are also supported and only a ; or GO statement will finish a statement, a new line is not enough. Files containing a single statement do not need to use a ; or GO.
+
+The sql change can also contain comments of either of the following formats:
+
+A multiline comment that starts with /* and ends with */.
+A single line comment starting with <space>--<space> and finishing at the end of the line.
+Note: By default it will attempt to split statements on a ';' or 'go' at the end of lines. Because of this, if you have a comment or some other non-statement ending ';' or 'go', don't have it at the end of a line or you will get invalid SQL.
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="endDelimiter" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Delimiter to apply to the end of the statement. Defaults to ';', may be set to ''.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="splitStatements" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Set to false to not have liquibase split statements on ;'s and GO's. Defaults to true if not set
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="stripComments" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Set to true to remove any comments in the SQL before executing, otherwise false. Defaults to false if not set
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="dbms" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="comment" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="sql" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="endDelimiter" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="splitStatements" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="stripComments" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="dbms" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="comment" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="sql" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="createProcedure">
+        <xsd:annotation>
+            <xsd:documentation>
+                Defines the definition for a stored procedure. This command is better to use for creating procedures than the raw sql command because it will not attempt to strip comments or break up lines.
+
+Often times it is best to use the CREATE OR REPLACE syntax along with setting runOnChange='true' on the enclosing changeSet tag. That way if you need to make a change to your procedure you can simply change your existing code rather than creating a new REPLACE PROCEDURE call. The advantage to this approach is that it keeps your change log smaller and allows you to more easily see what has changed in your procedure code through your source control system's diff command.
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="procedureBody" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="path" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    File containing the procedure text. Either this attribute or a nested procedure text is required.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="comments" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="procedureName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="replaceIfExists" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="dbms" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="relativeToChangelogFile" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="encoding" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="procedureBody" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="path" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="comments" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="procedureName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="replaceIfExists" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="dbms" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="relativeToChangelogFile" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="encoding" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="modifyDataType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Modify data type
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="newDataType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="newDataType" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="addLookupTable">
+        <xsd:annotation>
+            <xsd:documentation>
+                Creates a lookup table containing values stored in a column and creates a foreign key to the new table.
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="newTableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of lookup table to create
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="newColumnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column in the new table to create
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="existingTableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table containing the data to extract
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="existingColumnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column containing the data to extract
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="existingTableSchemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="newTableCatalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="constraintName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the foreign-key constraint to create between the existing table and the lookup table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="newTableSchemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="newColumnDataType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Data type of the new table column
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="existingTableCatalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="newTableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="newColumnName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="existingTableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="existingColumnName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="existingTableSchemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="newTableCatalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="constraintName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="newTableSchemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="newColumnDataType" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="existingTableCatalogName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="createView">
+        <xsd:annotation>
+            <xsd:documentation>
+                Create a new database view
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="path" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Path to file containing view definition
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="viewName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the view to create
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="replaceIfExists" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Use 'create or replace' syntax
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="fullDefinition" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Set to true if selectQuery is the entire view definition. False if the CREATE VIEW header should be added
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="relativeToChangelogFile" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="encoding" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="remarks" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="selectQuery" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    SQL for generating the view
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="path" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="viewName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="replaceIfExists" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="fullDefinition" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="relativeToChangelogFile" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="encoding" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="remarks" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="selectQuery" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropTable">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drops an existing table
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="cascadeConstraints" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="cascadeConstraints" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="setColumnRemarks">
+        <xsd:annotation>
+            <xsd:documentation>
+                Set remarks on a column
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="remarks" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="remarks" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="createPackage">
+        <xsd:annotation>
+            <xsd:documentation>
+                Creates a package
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="procedureBody" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="path" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    File containing the procedure text. Either this attribute or a nested procedure text is required.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="comments" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="replaceIfExists" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="dbms" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="relativeToChangelogFile" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="packageName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the package to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="encoding" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="packageText" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="procedureBody" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="path" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="comments" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="replaceIfExists" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="dbms" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="relativeToChangelogFile" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="packageName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="encoding" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="packageText" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="renameView">
+        <xsd:annotation>
+            <xsd:documentation>
+                Renames an existing view
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="oldViewName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the view to rename
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="newViewName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name to rename the view to
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="oldViewName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="newViewName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="createIndex">
+        <xsd:annotation>
+            <xsd:documentation>
+                Creates an index on an existing column or set of columns.
+            </xsd:documentation>
+        </xsd:annotation>
+        <choice maxOccurs="unbounded">
+            <element name="columns" type="class liquibase.change.AddColumnConfig" minOccurs="1" maxOccurs="unbounded"/>
+        </choice>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tablespace" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Tablepace to create the index in.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="indexName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the index to create
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+         
+        <xsd:attribute name="columns">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Column(s) to add to the index
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="clustered" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="unique" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Unique values index
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to add the index to
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tablespace" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="indexName" type="xsd:string" maxOccurs="unbounded"/>
+            <xsd:element name="columns"  maxOccurs="unbounded"/>
+             <xsd:element name="clustered" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="unique" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="dropCheckConstraint">
+        <xsd:annotation>
+            <xsd:documentation>
+                Drops an existing check constraint
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="constraintName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of check constraint to drop
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table to drop the check constraint from
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="constraintName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="addNotNullConstraint">
+        <xsd:annotation>
+            <xsd:documentation>
+                Adds a not-null constraint to an existing table. If a defaultNullValue attribute is passed, all null values for the column will be updated to the passed value before the constraint is applied.
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="defaultNullValue" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Value to set all currently null values to. If not set, change will fail if null values exist
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="constraintName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Created constraint name (if database supports names for NOT NULL constraints)
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnDataType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Current data type of the column
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="validate" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    This is true if the not null constraint has 'ENABLE VALIDATE' set, or false if the not null constrain has 'ENABLE NOVALIDATE' set.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Adds a not-null constraint to an existing table. If a defaultNullValue attribute is passed, all null values for the column will be updated to the passed value before the constraint is applied.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column to add the constraint to
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="defaultNullValue" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="constraintName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnDataType" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="validate" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="enableCheckConstraint">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enable Check Constraint
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="constraintName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="constraintName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="addAutoIncrement">
+        <xsd:annotation>
+            <xsd:documentation>
+                Converts an existing column to be an auto-increment (a.k.a 'identity') column
+            </xsd:documentation>
+        </xsd:annotation>
+                <xsd:attribute name="catalogName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the catalog
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="generationType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="defaultOnNull" type="xsd:boolean">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="incrementBy" type="xsd:integer">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnDataType" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Current data type of the column to make auto-increment
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="schemaName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the schema
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="startWith" type="xsd:integer">
+            <xsd:annotation>
+                <xsd:documentation>
+                    
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="tableName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the table
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+                <xsd:attribute name="columnName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Name of the column
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:group name="changeSetChildren">
+        <xsd:choice>
+             <xsd:element name="catalogName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="generationType" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="defaultOnNull" type="xsd:boolean" maxOccurs="unbounded"/>
+             <xsd:element name="incrementBy" type="xsd:integer" maxOccurs="unbounded"/>
+             <xsd:element name="columnDataType" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="schemaName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="startWith" type="xsd:integer" maxOccurs="unbounded"/>
+             <xsd:element name="tableName" type="xsd:string" maxOccurs="unbounded"/>
+             <xsd:element name="columnName" type="xsd:string" maxOccurs="unbounded"/>
+        </xsd:choice>
+    </xsd:group>
+
+</xsd:schema>
+
+
