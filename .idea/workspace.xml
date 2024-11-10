@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b22d8c0f-d6f1-4fb1-a715-4d645f231fd5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Apa/.idea/Apa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Apa/.idea/Apa.iml" afterDir="false" />
-    </list>
+    <list default="true" id="b22d8c0f-d6f1-4fb1-a715-4d645f231fd5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,7 +46,6 @@
     "Maven.liquibase-docgenerator [clean].executor": "Run",
     "Maven.liquibase-docgenerator [package].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "<unknown>",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/jajecnik.marci/Documents/GitHub/munka/liquibase-doc",
     "node.js.detected.package.eslint": "true",
@@ -118,6 +115,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731270461156</updated>
       <workItem from="1731270462429" duration="1376000" />
+      <workItem from="1731272230199" duration="180000" />
     </task>
     <servers />
   </component>
