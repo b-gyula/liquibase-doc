@@ -10,6 +10,7 @@
         <xsd:annotation>
             <xsd:documentation><![CDATA[${change.metaData.description}]]></xsd:documentation>
         </xsd:annotation>
+        <#if change.nestedParams?size != 0>
         <xsd:choice maxOccurs="unbounded">
         <#list change.nestedParams as nP>
             <#if nP.shouldTypeBePrintedFlag>
@@ -19,7 +20,9 @@
             </#if>
         </#list>
         </xsd:choice>
+        </#if>
         <#list change.params as param>
+
             <#if param.shouldTypeBePrintedFlag>
                 <#if param.isRequiredForAll() == 1>
             <xsd:attribute name="${param.paramData.parameterName}" type="${param.dataType}" use="required"/>
@@ -33,11 +36,12 @@
             <xsd:attribute name="${param.paramData.parameterName}"/>
                 </#if>
             </#if>
-            <xsd:annotation>
-                <xsd:documentation><![CDATA[${change.metaData.description}]]></xsd:documentation>
-            </xsd:annotation>
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[${change.metaData.description}]]></xsd:documentation>
+                </xsd:annotation>
         </#list>
     </xsd:complexType>
+
 </#list>
     <xsd:group name="changeSetChildren">
         <xsd:choice>
