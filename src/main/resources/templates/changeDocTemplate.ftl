@@ -8,7 +8,7 @@
 <#list changes as name, change>
     <xsd:complexType name="${name}">
         <xsd:annotation>
-            <xsd:documentation>${change.metaData.description}</xsd:documentation>
+            <xsd:documentation><![CDATA[${change.metaData.description}]]></xsd:documentation>
         </xsd:annotation>
         <xsd:choice maxOccurs="unbounded">
         <#list change.nestedParams as nP>
@@ -34,7 +34,7 @@
                 </#if>
             </#if>
             <xsd:annotation>
-                <xsd:documentation>${param.paramData.description}</xsd:documentation>
+                <xsd:documentation><![CDATA[${change.metaData.description}]]></xsd:documentation>
             </xsd:annotation>
         </#list>
     </xsd:complexType>

@@ -243,6 +243,16 @@ public class ChangeDocGenerator {
     private static void generateXSDwithFreeMarker(Map<String, SortedSet<Class<? extends Change>>> definedChanges, MySQLDatabase defaultExampleDatabase) throws IOException, TemplateException {
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_31);
         cfg.setClassForTemplateLoading(ChangeDocGenerator.class, "/templates");
+
+        cfg.setOutputEncoding("UTF-8");
+        cfg.setDefaultEncoding("UTF-8");
+        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+        cfg.setLogTemplateExceptions(false);
+        cfg.setWrapUncheckedExceptions(true);
+        cfg.setFallbackOnNullLoopVariable(false);
+        cfg.setObjectWrapper(new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_31).build());
+        cfg.setSharedVariable("esc", new freemarker.template.utility.XmlEscape());
+
         Template xsdTemplate = cfg.getTemplate("changeDocTemplate.ftl");
 
         /// TODO usage of nonEmptyString type
