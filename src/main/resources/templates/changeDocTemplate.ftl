@@ -13,20 +13,18 @@
         <xsd:choice maxOccurs="unbounded">
         <#list change.nestedParams as nP>
             <#if nP.shouldTypeBePrintedFlag>
-            <xsd:element name="${nP.paramData.parameterName}" type="xsd:${nP.paramData.dataType}" minOccurs="${nP.isRequiredForAll()}"/>
+            <xsd:element name="${nP.paramData.parameterName}" type="${nP.dataType}" minOccurs="${nP.isRequiredForAll()}"/>
             <#else >
             <xsd:element name="${nP.paramData.parameterName}" minOccurs="${nP.isRequiredForAll()}"/>
             </#if>
         </#list>
         </xsd:choice>
-        <-- TODO integerExp to replace biginteger -->
-        <-- TODO usage of nonEmptyString type -->
         <#list change.params as param>
             <#if param.shouldTypeBePrintedFlag>
                 <#if param.isRequiredForAll() == 1>
-            <xsd:attribute name="${param.paramData.parameterName}" type="xsd:${param.paramData.dataType}" use="required"/>
+            <xsd:attribute name="${param.paramData.parameterName}" type="${param.dataType}" use="required"/>
                 <#else >
-            <xsd:attribute name="${param.paramData.parameterName}" type="xsd:${param.paramData.dataType}"/>
+            <xsd:attribute name="${param.paramData.parameterName}" type="${param.dataType}"/>
                 </#if>
             <#else >
                 <#if param.isRequiredForAll() == 1>

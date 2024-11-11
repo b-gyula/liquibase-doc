@@ -215,9 +215,16 @@ public class ChangeDocGenerator {
             }
 
             final boolean shouldTypeBePrintedFlag;
-            public ParamWithTypeFlag(ChangeParamMetaData paramData, boolean shouldTypeBePrintedFlag) {
+
+            public String getDataType() {
+                return dataType;
+            }
+
+            final String dataType;
+            public ParamWithTypeFlag(ChangeParamMetaData paramData, boolean shouldTypeBePrintedFlag, String dataType) {
                 this.paramData = paramData;
                 this.shouldTypeBePrintedFlag = shouldTypeBePrintedFlag;
+                this.dataType = dataType;
             }
         }
         /**
@@ -248,9 +255,21 @@ public class ChangeDocGenerator {
             List<ChangeParamMetaData> params=  setExamples(defaultExampleDatabase, change, changeData.metaData);
             params.forEach(param -> {
                 boolean shouldBePrinted = ! skipTypeForType.contains(param.getDataType());
-                ChangeData.ParamWithTypeFlag paramWithTypeFlag = new ChangeData.ParamWithTypeFlag(param,shouldBePrinted);
+                String dataType = null;
+                if (shouldBePrinted) {
+                    switch (param.getDataType()) {
+                        case "bigInteger":
+                            dataType = "integerExp";
+                            break;
+                        default:
+                            dataType ="xsd:" + param.getDataType();
+                            break;
+                    }
+                }
+                ChangeData.ParamWithTypeFlag paramWithTypeFlag = new ChangeData.ParamWithTypeFlag(param,shouldBePrinted, dataType);
                 if (param.isNested()) { /// If the parameter is a container, add it to the nested parameters
                     changeData.nestedParams.add(paramWithTypeFlag);
+
                 }
                 else {
                     changeData.params.add(paramWithTypeFlag);
