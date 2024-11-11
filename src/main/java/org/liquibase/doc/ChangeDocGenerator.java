@@ -59,6 +59,7 @@ public class ChangeDocGenerator {
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_31);
         cfg.setClassForTemplateLoading(ChangeDocGenerator.class, "/templates");
 
+        /// Set the template encoding and exception handling for the avoidance of xsd errors in documentation tags
         cfg.setOutputEncoding("UTF-8");
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
@@ -76,7 +77,7 @@ public class ChangeDocGenerator {
             changeData.metaData = ChangeFactory.getInstance().getChangeMetaData(changeName);
             List<ChangeParamMetaData> params = setExamples(defaultExampleDatabase, change, changeData.metaData);
             params.forEach(param -> {
-                boolean shouldBePrinted = !skipTypeForType.contains(param.getDataType());
+                boolean shouldBePrinted = !skipTypeForType.contains(param.getDataType()); /// Determines if the type should be printed
                 String dataType = null;
                 if (shouldBePrinted)
                     dataType = convertDataTypeToXsdFormat(param);
@@ -172,6 +173,12 @@ public class ChangeDocGenerator {
         return params;
     }
 
+    /**
+     * Convert the data type to the XSD format
+     *
+     * @param param Change parameter
+     * @return XSD format of the data type
+     */
     static String convertDataTypeToXsdFormat(ChangeParamMetaData param) {
         switch (param.getDataType()) {
             case "bigInteger":
@@ -283,9 +290,13 @@ public class ChangeDocGenerator {
             return nestedParams;
         }
 
+        /**
+         * Wrapper class to store the parameter data along with the type flag, for the purpose of FreeMarker template type tag writing
+         */
         public static class ParamWithTypeFlag {
+
             final ChangeParamMetaData paramData;
-            final boolean shouldTypeBePrintedFlag;
+            final boolean shouldTypeBePrintedFlag; /// Flag to determine if the type should be printed in the XSD
             final String dataType;
 
             public ParamWithTypeFlag(ChangeParamMetaData paramData, boolean shouldTypeBePrintedFlag, String dataType) {
@@ -302,6 +313,11 @@ public class ChangeDocGenerator {
                 return paramData;
             }
 
+            /**
+             * Check if the parameter is required for all databases, in the format of xsd minOccours
+             *
+             * @return 1 if required for all, 0 otherwise
+             */
             public int isRequiredForAll() {
                 if (paramData.requiredForAll()) return 1;
                 else return 0;
