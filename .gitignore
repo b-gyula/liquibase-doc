@@ -1,2 +1,5 @@
 target
 /.idea/
+/liquibase-docgenerator.*
+/liquibase-docgenerator.log
+/liquibase_changes.xsd
