@@ -1,40 +1,17 @@
 package org.liquibase.doc;
 
 import freemarker.template.*;
-import j2html.tags.ContainerTag;
-import j2html.tags.Tag;
 import liquibase.change.*;
 import liquibase.change.core.*;
 import liquibase.change.custom.CustomChangeWrapper;
-import liquibase.changelog.ChangeSet;
 import liquibase.database.Database;
-import liquibase.database.DatabaseFactory;
-import liquibase.database.core.HsqlDatabase;
-import liquibase.database.core.MSSQLDatabase;
 import liquibase.database.core.MySQLDatabase;
-import liquibase.database.core.OracleDatabase;
-import liquibase.resource.AbstractResourceAccessor;
-import liquibase.resource.ClassLoaderResourceAccessor;
-import liquibase.resource.CompositeResourceAccessor;
-import liquibase.serializer.LiquibaseSerializable;
 import liquibase.serializer.LiquibaseSerializable.SerializationType;
-import liquibase.serializer.core.json.JsonChangeLogSerializer;
-import liquibase.serializer.core.xml.XMLChangeLogSerializer;
-import liquibase.serializer.core.yaml.YamlChangeLogSerializer;
-import liquibase.sql.Sql;
-import liquibase.sqlgenerator.SqlGeneratorFactory;
-import liquibase.statement.SqlStatement;
-import liquibase.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Stream;
-
-import static j2html.TagCreator.*;
 
 public class ChangeDocGenerator {
 
@@ -69,7 +46,7 @@ public class ChangeDocGenerator {
                 try {
                     Object o = orig.getCurrentValue(change);
                     boolean isBool = "boolean".equals(orig.getDataType());
-                    if ((isBool && null != o && (boolean) o) || !isBool) {
+                    if (!isBool || (null != o && (boolean) o)) {
                         this.defaultValue = o == null ? "" : o.toString();
                     }
                 } catch (Exception e) {
@@ -135,7 +112,7 @@ public class ChangeDocGenerator {
                         case "update":
                             columnConfig.setValue("address value");
                         case "dropColumn":
-                            exampleValue = Arrays.asList(columnConfig);
+                            exampleValue = Collections.singletonList(columnConfig);
                             break;
                         case "createTable":
                             ArrayList<ColumnConfig> columns =
@@ -149,7 +126,7 @@ public class ChangeDocGenerator {
                     columnConfig.setName("address");
                     if (exampleChange instanceof CreateIndexChange) {
                         columnConfig.setDescending(true);
-                        exampleValue = Arrays.asList(columnConfig);
+                        exampleValue = Collections.singletonList(columnConfig);
                     } else {
                         columnConfig.setType("varchar(255)");
                         columnConfig.setPosition(2);
@@ -188,6 +165,7 @@ public class ChangeDocGenerator {
         return params;
     }
 
+
     /**
      * Wrapper class to store the change metadata, parameters, and nested parameters for the FreeMarker template
      */
@@ -203,28 +181,49 @@ public class ChangeDocGenerator {
             return metaData;
         }
 
-        public List<ChangeParamMetaData> getParams() {
+        public List<ParamWithTypeFlag> getParams() {
             return params;
         }
 
-        public List<ChangeParamMetaData> getNestedParams() {
+        public List<ParamWithTypeFlag> getNestedParams() {
             return nestedParams;
         }
 
         /**
          * Nested parameters of a change (children)
          */
-        List<ChangeParamMetaData> nestedParams;
+        final List<ParamWithTypeFlag> nestedParams;
 
         /**
          * Metadata of a change
          */
         ChangeMetaData metaData;
 
+        public static class ParamWithTypeFlag{
+            final ChangeParamMetaData paramData;
+
+            public boolean getShouldTypeBePrintedFlag() {
+                return shouldTypeBePrintedFlag;
+            }
+
+            public ChangeParamMetaData getParamData() {
+                return paramData;
+            }
+            public int isRequiredForAll() {
+                if (paramData.requiredForAll()) return 1;
+                else return 0;
+            }
+
+            final boolean shouldTypeBePrintedFlag;
+            public ParamWithTypeFlag(ChangeParamMetaData paramData, boolean shouldTypeBePrintedFlag) {
+                this.paramData = paramData;
+                this.shouldTypeBePrintedFlag = shouldTypeBePrintedFlag;
+            }
+        }
         /**
          * Parameters of a change, wrapped in ChangeParamMetaData
          */
-        List<ChangeParamMetaData> params;
+        final List<ParamWithTypeFlag> params;
     }
 
     /**
@@ -239,20 +238,25 @@ public class ChangeDocGenerator {
         cfg.setClassForTemplateLoading(ChangeDocGenerator.class, "/templates");
         Template xsdTemplate = cfg.getTemplate("changeDocTemplate.ftl");
 
+        ///TODO integerExp to replace biginteger
+        /// TODO usage of nonEmptyString type
         Map<String, ChangeData> changeDataModel = new HashMap<>(); /// Map for the processed changes
         for (String changeName : definedChanges.keySet()) {
-            Change exampleChange = ChangeFactory.getInstance().create(changeName); /// Create an instance of the change
+            Change change = ChangeFactory.getInstance().create(changeName);
             ChangeData changeData = new ChangeData();
-            changeData.metaData = ChangeFactory.getInstance().getChangeMetaData(exampleChange); /// Get the metadata of the change
-            changeData.params =  setExamples(defaultExampleDatabase, exampleChange, changeData.metaData); /// Set the examples for the change
-            for (ChangeParamMetaData param : changeData.params) {
-                if (param.isContainer()) { /// If the parameter is a container, add it to the nested parameters
-                    changeData.nestedParams.add(param);
+            changeData.metaData = ChangeFactory.getInstance().getChangeMetaData(changeName);
+            List<ChangeParamMetaData> params=  setExamples(defaultExampleDatabase, change, changeData.metaData);
+            params.forEach(param -> {
+                boolean shouldBePrinted = ! skipTypeForType.contains(param.getDataType());
+                ChangeData.ParamWithTypeFlag paramWithTypeFlag = new ChangeData.ParamWithTypeFlag(param,shouldBePrinted);
+                if (param.isNested()) { /// If the parameter is a container, add it to the nested parameters
+                    changeData.nestedParams.add(paramWithTypeFlag);
                 }
-            }
-            if (changeData.metaData != null) { /// If the metadata is present, add it to the changeDataModel
-                changeDataModel.put(changeData.metaData.getName(), changeData);
-            }
+                else {
+                    changeData.params.add(paramWithTypeFlag);
+                }
+            });
+            changeDataModel.put(changeName, changeData);
         }
 
         Map<String, Object> xsdDataModel = new HashMap<>(); /// Map for the processed changes and for the template

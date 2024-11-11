@@ -1,66 +1,51 @@
-<#-- Template for generating documentation for custom changes -->
+<?xml version="1.0" encoding="UTF-8"?>
+
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             targetNamespace="http://www.liquibase.org/xml/ns/dbchangelog"
             xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
             elementFormDefault="qualified">
 
 <#list changes as name, change>
-    <#assign changeMetaData = change.metaData>
-    <xsd:complexType name="${changeMetaData.name}">
+    <xsd:complexType name="${name}">
         <xsd:annotation>
-            <xsd:documentation>
-                ${changeMetaData.description}
-            </xsd:documentation>
+            <xsd:documentation>${change.metaData.description}</xsd:documentation>
         </xsd:annotation>
-        <#list change.nestedParams as changeNestedParams>
-        <choice maxOccurs="unbounded">
-             <#if changeNestedParams.requiredForAll() == true>
-                 <#assign mO = 1>
-            <#else>
-                <#assign mO = 0>
+        <xsd:choice maxOccurs="unbounded">
+        <#list change.nestedParams as nP>
+            <#if nP.shouldTypeBePrintedFlag>
+            <xsd:element name="${nP.paramData.parameterName}" type="xsd:${nP.paramData.dataType}" minOccurs="${nP.isRequiredForAll()}"/>
+            <#else >
+            <xsd:element name="${nP.paramData.parameterName}" minOccurs="${nP.isRequiredForAll()}"/>
             </#if>
-            <element name="${changeNestedParams.parameterName}" type="${changeNestedParams.containedType}" minOccurs="${mO}" maxOccurs="unbounded"/>
-        </choice>
         </#list>
-        <#list change.getParams() as params>
-        <#--  Mapping types to XSD types  -->
-        <#if params.dataType == "list" || params.dataType == "databaseFunction" || params.dataType ==  "sequenceNextValueFunction"> <#--   list, databaseFunction and sequenceNextValueFunction should not be printed  -->
-        <xsd:attribute name="${params.parameterName}">
-        <#else>
-            <#assign xsdType = "xsd:${params.dataType?lower_case}">
-            <#if xsdType == "xsd:biginteger">
-                <#assign xsdType = "xsd:integer">  <#--  Correct mapping for biginteger  -->
-            <#--  Add other mappings as needed  -->
+        </xsd:choice>
+        <-- TODO integerExp to replace biginteger -->
+        <-- TODO usage of nonEmptyString type -->
+        <#list change.params as param>
+            <#if param.shouldTypeBePrintedFlag>
+                <#if param.isRequiredForAll() == 1>
+            <xsd:attribute name="${param.paramData.parameterName}" type="xsd:${param.paramData.dataType}" use="required"/>
+                <#else >
+            <xsd:attribute name="${param.paramData.parameterName}" type="xsd:${param.paramData.dataType}"/>
+                </#if>
+            <#else >
+                <#if param.isRequiredForAll() == 1>
+            <xsd:attribute name="${param.paramData.parameterName}" use="required"/>
+                <#else >
+            <xsd:attribute name="${param.paramData.parameterName}"/>
+                </#if>
             </#if>
-        <xsd:attribute name="${params.parameterName}" type="${xsdType}">
-        </#if>
             <xsd:annotation>
-                <xsd:documentation>
-                    ${params.description}
-                </xsd:documentation>
+                <xsd:documentation>${param.paramData.description}</xsd:documentation>
             </xsd:annotation>
-        </xsd:attribute>
         </#list>
     </xsd:complexType>
-
+</#list>
     <xsd:group name="changeSetChildren">
         <xsd:choice>
-            <#list change.getParams() as params>
-             <#if params.dataType == "list" || params.dataType == "databaseFunction" || params.dataType ==  "sequenceNextValueFunction">
-            <xsd:element name="${params.parameterName}"  maxOccurs="unbounded"/>
-             <#else>
-                 <#assign xsdType = "xsd:${params.dataType?lower_case}">
-                 <#if xsdType == "xsd:biginteger">
-                     <#assign xsdType = "xsd:integer">  <#--  Correct mapping for biginteger  -->
-                     <#--  Add other mappings as needed  -->
-                 </#if>
-             <xsd:element name="${params.parameterName}" type="${xsdType}" maxOccurs="unbounded"/>
-             </#if>
-             </#list>
+        <#list changes as name, change>
+            <xsd:element name="${name}" type="${name}"/>
+        </#list>
         </xsd:choice>
     </xsd:group>
-</#list>
-
 </xsd:schema>
-
-
