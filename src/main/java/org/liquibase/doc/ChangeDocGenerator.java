@@ -252,10 +252,8 @@ public class ChangeDocGenerator {
         cfg.setFallbackOnNullLoopVariable(false);
         cfg.setObjectWrapper(new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_31).build());
         cfg.setSharedVariable("esc", new freemarker.template.utility.XmlEscape());
-
         Template xsdTemplate = cfg.getTemplate("changeDocTemplate.ftl");
 
-        /// TODO usage of nonEmptyString type
         Map<String, ChangeData> changeDataModel = new HashMap<>(); /// Map for the processed changes
         for (String changeName : definedChanges.keySet()) {
             Change change = ChangeFactory.getInstance().create(changeName);
@@ -265,20 +263,11 @@ public class ChangeDocGenerator {
             params.forEach(param -> {
                 boolean shouldBePrinted = ! skipTypeForType.contains(param.getDataType());
                 String dataType = null;
-                if (shouldBePrinted) {
-                    switch (param.getDataType()) {
-                        case "bigInteger":
-                            dataType = "integerExp";
-                            break;
-                        default:
-                            dataType ="xsd:" + param.getDataType();
-                            break;
-                    }
-                }
+                if (shouldBePrinted)
+                    dataType = convertDataTypeToXsdFormat(param);
                 ChangeData.ParamWithTypeFlag paramWithTypeFlag = new ChangeData.ParamWithTypeFlag(param,shouldBePrinted, dataType);
                 if (param.isNested()) { /// If the parameter is a container, add it to the nested parameters
                     changeData.nestedParams.add(paramWithTypeFlag);
-
                 }
                 else {
                     changeData.params.add(paramWithTypeFlag);
@@ -295,12 +284,26 @@ public class ChangeDocGenerator {
         bufferedWriter.close();
     }
 
+    static String convertDataTypeToXsdFormat(ChangeParamMetaData param) {
+        switch (param.getDataType()) {
+            case "bigInteger":
+                return "integerExp";
+            case "string":
+                if (param.requiredForAll())
+                    return "nonEmptyString";
+                else
+                    return "xsd:string";
+            default:
+                return"xsd:" + param.getDataType();
+        }
+    }
+
     final static String ALL = "all";
 
     /**
      * List types should not be displayed
      */
-    final static List<String> skipTypeForType = Arrays.asList("string", "list", "databaseFunction", "sequenceNextValueFunction");
+    final static List<String> skipTypeForType = Arrays.asList( "list", "databaseFunction", "sequenceNextValueFunction");
     /**
      * Display names for types
      */
