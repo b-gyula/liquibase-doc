@@ -245,7 +245,6 @@ public class ChangeDocGenerator {
         cfg.setClassForTemplateLoading(ChangeDocGenerator.class, "/templates");
         Template xsdTemplate = cfg.getTemplate("changeDocTemplate.ftl");
 
-        ///TODO integerExp to replace biginteger
         /// TODO usage of nonEmptyString type
         Map<String, ChangeData> changeDataModel = new HashMap<>(); /// Map for the processed changes
         for (String changeName : definedChanges.keySet()) {
