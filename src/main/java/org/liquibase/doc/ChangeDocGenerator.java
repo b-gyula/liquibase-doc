@@ -60,14 +60,6 @@ public class ChangeDocGenerator {
         cfg.setClassForTemplateLoading(ChangeDocGenerator.class, "/templates");
 
         /// Set the template encoding and exception handling for the avoidance of xsd errors in documentation tags
-        cfg.setOutputEncoding("UTF-8");
-        cfg.setDefaultEncoding("UTF-8");
-        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-        cfg.setLogTemplateExceptions(false);
-        cfg.setWrapUncheckedExceptions(true);
-        cfg.setFallbackOnNullLoopVariable(false);
-        cfg.setObjectWrapper(new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_31).build());
-        cfg.setSharedVariable("esc", new freemarker.template.utility.XmlEscape());
         Template xsdTemplate = cfg.getTemplate("changeDocTemplate.ftl");
 
         Map<String, ChangeData> changeDataModel = new HashMap<>(); /// Map for the processed changes

@@ -25,20 +25,21 @@
 
             <#if param.shouldTypeBePrintedFlag>
                 <#if param.isRequiredForAll() == 1>
-            <xsd:attribute name="${param.paramData.parameterName}" type="${param.dataType}" use="required"/>
+            <xsd:attribute name="${param.paramData.parameterName}" type="${param.dataType}" use="required">
                 <#else >
-            <xsd:attribute name="${param.paramData.parameterName}" type="${param.dataType}"/>
+            <xsd:attribute name="${param.paramData.parameterName}" type="${param.dataType}">
                 </#if>
             <#else >
                 <#if param.isRequiredForAll() == 1>
-            <xsd:attribute name="${param.paramData.parameterName}" use="required"/>
+            <xsd:attribute name="${param.paramData.parameterName}" use="required">
                 <#else >
-            <xsd:attribute name="${param.paramData.parameterName}"/>
+            <xsd:attribute name="${param.paramData.parameterName}">
                 </#if>
             </#if>
                 <xsd:annotation>
-                    <xsd:documentation><![CDATA[${change.metaData.description}]]></xsd:documentation>
+                    <xsd:documentation><![CDATA[${param.paramData.description}]]></xsd:documentation>
                 </xsd:annotation>
+            </xsd:attribute>
         </#list>
     </xsd:complexType>
 
@@ -50,4 +51,50 @@
         </#list>
         </xsd:choice>
     </xsd:group>
+
+    <xsd:simpleType name="propertyExpression" id="propertyExpression">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\$\{[\w\.\-\+_]+\}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="booleanExp" id="booleanExp">
+        <xsd:annotation>
+            <xsd:documentation>Extension to standard XSD boolean type to allow ${r"${}"} parameters</xsd:documentation>
+        </xsd:annotation>
+
+        <xsd:union>
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:boolean"/>
+            </xsd:simpleType>
+            <xsd:simpleType>
+                <xsd:restriction base="propertyExpression"/>
+            </xsd:simpleType>
+        </xsd:union>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="integerExp" id="integerExp">
+        <xsd:annotation>
+            <xsd:documentation>Extension to standard XSD integer type to allow ${r"${}"} parameter placeholders</xsd:documentation>
+        </xsd:annotation>
+        <xsd:union>
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:int">
+                    <xsd:minInclusive value="0"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType>
+                <xsd:restriction base="propertyExpression"/>
+            </xsd:simpleType>
+        </xsd:union>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="nonEmptyString">
+        <xsd:annotation>
+            <xsd:documentation>String containing at least 1 non whitespace character</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[\S\t].*"/>
+        </xsd:restriction>
+    </xsd:simpleType>
 </xsd:schema>
