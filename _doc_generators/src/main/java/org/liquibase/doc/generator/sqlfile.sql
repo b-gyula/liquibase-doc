@@ -1,1 +1,0 @@
-select id, name from person where id > 10
