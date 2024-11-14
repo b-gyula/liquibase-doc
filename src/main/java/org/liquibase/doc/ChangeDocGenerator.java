@@ -1,6 +1,7 @@
 package org.liquibase.doc;
 
 import freemarker.template.*;
+import liquibase.Scope;
 import liquibase.change.*;
 import liquibase.change.core.CreateIndexChange;
 import liquibase.change.custom.CustomChangeWrapper;
@@ -43,19 +44,20 @@ public class ChangeDocGenerator {
 
     public static void main(String[] args) throws Exception {
         logger.info("Generating xsd for all changes in included jar");
-        TreeMap<String, SortedSet<Class<? extends Change>>> sortedChanges = new TreeMap<>(ChangeFactory.getInstance().getRegistry());
-        generateXSDwithFreeMarker(ChangeFactory.getInstance().getRegistry(), new MySQLDatabase());
+        generateXSDwithFreeMarker();
     }
 
     /**
      * Generate XSD file using FreeMarker template
      *
-     * @param definedChanges         Changes to generate XSD for
-     * @param defaultExampleDatabase Default database to use for examples
      * @throws IOException       if an I/O error occurs
      * @throws TemplateException if an error occurs while processing the template
      */
-    private static void generateXSDwithFreeMarker(Map<String, SortedSet<Class<? extends Change>>> definedChanges, MySQLDatabase defaultExampleDatabase) throws IOException, TemplateException {
+    private static void generateXSDwithFreeMarker() throws IOException, TemplateException {
+        ChangeFactory factory = Scope.getCurrentScope().getSingleton(ChangeFactory.class);
+        SortedSet<String> definedChanges=factory.getDefinedChanges();
+        MySQLDatabase defaultExampleDatabase = new MySQLDatabase();
+
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_31);
         cfg.setClassForTemplateLoading(ChangeDocGenerator.class, "/templates");
 
@@ -63,10 +65,12 @@ public class ChangeDocGenerator {
         Template xsdTemplate = cfg.getTemplate("changeDocTemplate.ftl");
 
         Map<String, ChangeData> changeDataModel = new HashMap<>(); /// Map for the processed changes
-        for (String changeName : definedChanges.keySet()) {
-            Change change = ChangeFactory.getInstance().create(changeName);
+
+        definedChanges.forEach(changeName -> {
+            Change change = factory.create(changeName);
             ChangeData changeData = new ChangeData();
-            changeData.metaData = ChangeFactory.getInstance().getChangeMetaData(changeName);
+            changeData.metaData = factory.getChangeMetaData(changeName);
+
             List<ChangeParamMetaData> params = setExamples(defaultExampleDatabase, change, changeData.metaData);
             params.forEach(param -> {
                 boolean shouldBePrinted = !skipTypeForType.contains(param.getDataType()); /// Determines if the type should be printed
@@ -81,7 +85,7 @@ public class ChangeDocGenerator {
                 }
             });
             changeDataModel.put(changeName, changeData);
-        }
+        });
 
         Map<String, Object> xsdDataModel = new HashMap<>(); /// Map for the processed changes and for the template
         xsdDataModel.put("changes", changeDataModel);
@@ -157,7 +161,7 @@ public class ChangeDocGenerator {
         if (CustomChangeWrapper.class.isAssignableFrom(exampleChange.getClass())) {
             try {
                 CustomChangeWrapper custom = (CustomChangeWrapper) exampleChange;
-                custom.setClassLoader(exampleChange.getClass().getClassLoader());
+               // custom.setClassLoader(exampleChange.getClass().getClassLoader());
                 custom.setClass("com.example.CustomChange");
             } catch (Exception e) { // Expected
             }

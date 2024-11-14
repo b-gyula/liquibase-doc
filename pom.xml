@@ -18,7 +18,7 @@
         <java.version>11.0.24</java.version>
 
         <!-- UPDATE THIS BEFORE RE-GENERATING -->
-        <liquibase.version>3.10.3</liquibase.version>
+        <liquibase.version>4.29.2</liquibase.version>
 
         <commons.lang3.version>3.3.2</commons.lang3.version>
         <commons.io.version>2.4</commons.io.version>
@@ -94,11 +94,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
                 <configuration>
                     <archive>
                     <manifest>
                         <addClasspath>true</addClasspath>
-                        <mainClass>org.liquibase.doc.generator.DocGenerator</mainClass>
+                        <mainClass>org.liquibase.doc.ChangeDocGenerator</mainClass>
                     </manifest>
                     </archive>
                 </configuration>
@@ -118,8 +119,8 @@
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <outputFile>../${project.artifactId}-${project.version}.jar</outputFile>
                             <transformers>
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>org.liquibase.doc.ChangeDocGenerator</mainClass>
                                 </transformer>
                             </transformers>
                             <artifactSet>
